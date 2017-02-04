@@ -1,5 +1,10 @@
 /node_modules
 /public/storage
+/public/css
+/public/js
+/public/fonts
+/public/layout
+/theme
 /vendor
 /.idea
 Homestead.json
