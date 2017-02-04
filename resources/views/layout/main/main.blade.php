@@ -13,6 +13,7 @@
     <meta content="" name="author" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/layout/css/layout.css') }}" rel="stylesheet" type="text/css" />
+    @stack('css')
     <link rel="shortcut icon" href="favicon.ico" /> </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 <div class="page-wrapper">
@@ -22,9 +23,8 @@
         <div class="page-content-wrapper">
             <div class="page-content">
                 {{--@include('layout.main.breadcrumbs')--}}
-                <h1 class="page-title"> Blank Page Layout
-                    <small>blank page layout</small>
-                </h1>
+                <h1 class="page-title">{{ $title or 'Title' }}</h1>
+                @yield('content')
             </div>
         </div>
         @include('layout.main.quickbar.quickbar')
@@ -36,5 +36,6 @@
 <script src="{{ asset('/layout/js/ie.js') }}"></script>
 <![endif]-->
 <script src="{{ asset('/layout/js/layout.js') }}" type="text/javascript"></script>
+@stack('js')
 </body>
 </html>
