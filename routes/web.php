@@ -1,5 +1,8 @@
 <?php
 
 Route::get('/', function () {
-    return view('home');
-});
+    return view('home')->withTitle('Dashboard');
+})->name('home');
+
+Route::resource('log', LogController::class);
+

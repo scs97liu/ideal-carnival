@@ -15,7 +15,7 @@
     <link href="{{ asset('/layout/css/layout.css') }}" rel="stylesheet" type="text/css" />
     @stack('css')
     <link rel="shortcut icon" href="favicon.ico" /> </head>
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
 <div class="page-wrapper">
     @include('layout.main.header.header')
     <div class="page-container">

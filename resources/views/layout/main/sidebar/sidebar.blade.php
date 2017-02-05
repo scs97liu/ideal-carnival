@@ -6,7 +6,7 @@
                     <span></span>
                 </div>
             </li>
-            @include('layout.main.sidebar.search')
+            {{--@include('layout.main.sidebar.search')--}}
             @include('layout.main.sidebar.menu')
         </ul>
     </div>
