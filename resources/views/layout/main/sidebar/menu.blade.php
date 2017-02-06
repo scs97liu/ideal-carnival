@@ -17,7 +17,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{ route('graph.index') }}" class="nav-link">
         <i class="fa fa-line-chart"></i>
         <span class="title">Graphs & Summaries</span>
     </a>

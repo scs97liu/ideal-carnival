@@ -2,6 +2,11 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">
+    <style>
+        .log-overview div {
+            float: left;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -13,22 +18,17 @@
         </div>
         <div class="portlet-body">
             <div class="table-scrollable">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th style="width: 10%"> Date/Time </th>
-                            <th style="width: 70%"> Overview </th>
-                            <th style="width: 20%"> Actions </th>
+                            <th style="width: 50%"> Overview </th>
+                            <th style="width: 10%"> Notes </th>
+                            <th style="width: 30%"> Actions </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td> 1 </td>
-                            <td> Mark </td>
-                            <td>
-                                <span class="label label-sm label-success"> Approved </span>
-                            </td>
-                        </tr>
+                        @each('log.table_overview', $rows, 'row')
                     </tbody>
                 </table>
             </div>

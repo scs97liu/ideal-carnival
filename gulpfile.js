@@ -67,4 +67,28 @@ elixir(mix => {
         themePath + 'global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js',
         themePath + 'global/plugins/clockface/js/clockface.js'
     ], 'public/js/datetime.js');
+
+    mix.combine([
+        themePath + 'global/plugins/amcharts/amcharts/amcharts.js',
+        themePath + 'global/plugins/amcharts/amcharts/serial.js',
+        themePath + 'global/plugins/amcharts/amcharts/pie.js',
+        themePath + 'global/plugins/amcharts/amcharts/radar.js',
+        themePath + 'global/plugins/amcharts/amcharts/themes/light.js',
+        themePath + 'global/plugins/amcharts/amcharts/themes/patterns.js',
+        themePath + 'global/plugins/amcharts/amcharts/themes/chalk.js',
+        themePath + 'global/plugins/amcharts/ammap/ammap.js',
+        themePath + 'global/plugins/amcharts/ammap/maps/js/worldLow.js',
+        themePath + 'global/plugins/amcharts/amstockcharts/amstock.js'
+    ], 'public/js/graphs.js');
+
+    mix.combine([
+        themePath + 'global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css',
+        themePath + 'global/plugins/bootstrap-modal/css/bootstrap-modal.css'
+    ], 'public/css/modals.css');
+
+
+    mix.combine([
+        themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js',
+        themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modal.js'
+    ], 'public/js/modals.js');
 });
