@@ -41,6 +41,7 @@ elixir(mix => {
     mix.copy(themePath + 'global/plugins/simple-line-icons/fonts', 'public/layout/css/fonts');
     mix.copy(themePath + 'layouts/layout/img', 'public/layout/img');
     mix.copy(themePath + 'global/img/loading.gif', 'public/layout/img/loading.gif');
+    mix.copy(themePath + 'pages/img/avatars', 'public/layout/img');
 
     mix.combine([
         themePath + 'global/plugins/counterup/jquery.waypoints.min.js',

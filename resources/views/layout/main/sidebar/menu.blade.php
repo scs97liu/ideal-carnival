@@ -23,14 +23,14 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{ route('communication.index') }}" class="nav-link">
         <i class="fa fa-stethoscope"></i>
         <span class="title">Communications</span>
     </a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{ route('setting.index') }}" class="nav-link">
         <i class="fa fa-cog"></i>
-        <span class="title">Tools and Settings</span>
+        <span class="title">Settings</span>
     </a>
 </li>
