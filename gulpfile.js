@@ -87,7 +87,6 @@ elixir(mix => {
         themePath + 'global/plugins/bootstrap-modal/css/bootstrap-modal.css'
     ], 'public/css/modals.css');
 
-
     mix.combine([
         themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js',
         themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modal.js'

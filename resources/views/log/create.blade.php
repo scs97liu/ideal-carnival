@@ -1,8 +1,8 @@
 @extends('layout.main.main')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">
-<link rel="stylesheet" href="{{ asset('/css/modals.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/modals.css') }}">
 @endpush
 
 @section('content')

@@ -23,7 +23,7 @@ class GraphController extends Controller
      */
     public function create()
     {
-        //
+        return 'Create form';
     }
 
     /**
