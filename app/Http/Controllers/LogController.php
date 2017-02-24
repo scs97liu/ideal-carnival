@@ -19,14 +19,14 @@ class LogController extends Controller
             ['Feb 5th 2017', '9.5', '10g', 'N/A', true],
         ];
 
-        return view('log.index')
+        return view('main.log.index')
             ->withRows($rows)
             ->withTitle('Log History');
     }
 
     public function create()
     {
-        return view('log.create')->withTitle('Add New Log Entry');
+        return view('main.log.create')->withTitle('Add New Log Entry');
     }
 
     public function store(Request $request)

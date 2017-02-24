@@ -10,6 +10,32 @@ elixir(mix => {
         themePath + 'global/plugins/simple-line-icons/simple-line-icons.css',
         themePath + 'global/plugins/bootstrap/css/bootstrap.css',
         themePath + 'global/plugins/bootstrap-switch/css/bootstrap-switch.css',
+        themePath + 'global/plugins/select2/css/select2.css',
+        themePath + 'global/plugins/select2/css/select2-bootstrap.min.css',
+        themePath + 'global/css/components.css',
+        themePath + 'global/css/plugins.css',
+        themePath + 'pages/css/login.css'
+    ], 'public/auth/css/login.css')
+
+    mix.combine([
+        themePath + 'global/plugins/jquery.min.js',
+        themePath + 'global/plugins/bootstrap/js/bootstrap.js',
+        themePath + 'global/plugins/js.cookie.min.js',
+        themePath + 'global/plugins/jquery-slimscroll/jquery.slimscroll.js',
+        themePath + 'global/plugins/jquery.blockui.min.js',
+        themePath + 'global/plugins/bootstrap-switch/js/bootstrap-switch.js',
+        themePath + 'global/plugins/jquery-validation/js/jquery.validate.js',
+        themePath + 'global/plugins/jquery-validation/js/additional-methods.js',
+        themePath + 'global/plugins/select2/js/select2.full.js',
+        themePath + 'global/scripts/app.js',
+        themePath + 'pages/scripts/login.js'
+    ], 'public/auth/js/login.js')
+
+    mix.combine([
+        themePath + 'global/plugins/font-awesome/css/font-awesome.css',
+        themePath + 'global/plugins/simple-line-icons/simple-line-icons.css',
+        themePath + 'global/plugins/bootstrap/css/bootstrap.css',
+        themePath + 'global/plugins/bootstrap-switch/css/bootstrap-switch.css',
         themePath + 'global/css/components.css',
         themePath + 'global/css/plugins.css',
         themePath + 'layouts/layout/css/layout.css',

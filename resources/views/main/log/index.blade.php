@@ -1,4 +1,4 @@
-@extends('layout.main.main')
+@extends('main.layout.main')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @each('log.table_overview', $rows, 'row')
+                        @each('main.log.table_overview', $rows, 'row')
                     </tbody>
                 </table>
             </div>

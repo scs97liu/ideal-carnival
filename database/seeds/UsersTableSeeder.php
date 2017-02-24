@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         $danny = User::create([
             'first_name' => 'Daniel',
             'last_name' => 'Kivi',
-            'email' => 'dkkivi@lakeheadu.ca',
+            'email' => 'sugarfreedanny@gmail.com',
             'password' => bcrypt('password')]
         );
 
@@ -26,6 +26,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'scliu@lakeheadu.ca',
             'password' => bcrypt('password')]
         );
-
     }
 }

@@ -13,7 +13,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('setting.index')->withTitle('Settings');
+        return view('main.setting.index')->withTitle('Settings');
     }
 
     /**

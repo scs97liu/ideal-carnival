@@ -1,4 +1,4 @@
-@extends('layout.main.main')
+@extends('main.layout.main')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">

@@ -13,7 +13,7 @@ class CommunicationController extends Controller
      */
     public function index()
     {
-        return view('communication.index')->withTitle('Send Message to Medical Professional');
+        return view('main.communication.index')->withTitle('Send Message to Medical Professional');
     }
 
     /**
@@ -23,7 +23,7 @@ class CommunicationController extends Controller
      */
     public function create()
     {
-        return view('communication.addprof')->withTitle('Add Medical Professional');
+        return view('main.communication.addprof')->withTitle('Add Medical Professional');
     }
 
     /**

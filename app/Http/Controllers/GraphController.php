@@ -13,7 +13,7 @@ class GraphController extends Controller
      */
     public function index()
     {
-        return view('graph.index')->withTitle('Weekly Summary');
+        return view('main.graph.index')->withTitle('Weekly Summary');
     }
 
     /**

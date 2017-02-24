@@ -6,8 +6,8 @@
                     <span></span>
                 </div>
             </li>
-            {{--@include('layout.main.sidebar.search')--}}
-            @include('layout.main.sidebar.menu')
+            {{--@include('main.layout.sidebar.search')--}}
+            @include('main.layout.sidebar.menu')
         </ul>
     </div>
 </div>

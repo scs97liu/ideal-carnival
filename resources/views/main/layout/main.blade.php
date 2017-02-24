@@ -17,21 +17,21 @@
     <link rel="shortcut icon" href="favicon.ico" /> </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
 <div class="page-wrapper">
-    @include('layout.main.header.header')
+    @include('main.layout.header.header')
     <div class="page-container">
-        @include('layout.main.sidebar.sidebar')
+        @include('main.layout.sidebar.sidebar')
         <div class="page-content-wrapper">
             <div class="page-content">
-                {{--@include('layout.main.breadcrumbs')--}}
+                {{--@include('main.layout.breadcrumbs')--}}
                 <h1 class="page-title">{{ $title or 'Title' }}</h1>
                 @yield('content')
             </div>
         </div>
-        @include('layout.main.quickbar.quickbar')
+        @include('main.layout.quickbar.quickbar')
     </div>
-    {{--@include('layout.main.footer')--}}
+    {{--@include('main.layout.footer')--}}
 </div>
-{{--@include('layout.main.quicknav')--}}
+{{--@include('main.layout.quicknav')--}}
 <!--[if lt IE 9]>
 <script src="{{ asset('/layout/js/ie.js') }}"></script>
 <![endif]-->
