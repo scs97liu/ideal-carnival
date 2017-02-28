@@ -3,14 +3,20 @@
     <td>
         <div class="row">
             <div class="col-xs-4">
-                <i class="fa fa-tint"></i> {{ $log->bg->bg }}
+                @if($log->bg)
+                    <i class="fa fa-tint"></i> {{ $log->bg->bg }}
+                @endif
             </div>
             <div class="col-xs-4 text-center">
-                <i class="fa fa-cutlery"></i> {{ $log->carb->carbs }}
+                @if($log->carb)
+                    <i class="fa fa-cutlery"></i> {{ $log->carb->carbs }}
+                @endif
             </div>
             <div class="col-xs-4">
                 <div class="pull-right">
-                    <i class="fa fa-bicycle"></i> {{ $log->exercise->minutes }}
+                    @if($log->exercise)
+                        <i class="fa fa-bicycle"></i> {{ $log->exercise->minutes }}
+                    @endif
                 </div>
             </div>
         </div>
