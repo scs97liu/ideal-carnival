@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePreferencesTable extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreatePreferencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('preferences', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->float('low_target');
-            $table->float('high_target');
-            $table->float('insulin_to_carb');
-            $table->float('insulin_sensitivity');
-            $table->string('preferred_units');
+            $table->integer('medical_professional_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('medical_professional_id')->references('id')->on('medical_professionals');
         });
     }
 
@@ -34,6 +31,6 @@ class CreatePreferencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preferences');
+        Schema::dropIfExists('permissions');
     }
 }

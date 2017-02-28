@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\BloodSugar;
+use App\Carb;
+use App\Exercise;
+use App\Log;
+use App\Medication;
+use App\Note;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LogController extends Controller
 {
     public function index()
     {
-        $rows = [
-            ['Feb 7th 2017', '5.4', '40g', '20min', true],
-            ['Feb 7th 2017', '12.1', 'N/A', 'N/A', true],
-            ['Feb 7th 2017', '8.2', '60g', 'N/A', true],
-            ['Feb 6th 2017', '7.1', '50g', 'N/A', true],
-            ['Feb 6th 2017', '3.2', 'N/A', '45min', true],
-            ['Feb 5th 2017', '8.2', '100g', 'N/A', true],
-            ['Feb 5th 2017', '10.5', '20g', 'N/A', true],
-            ['Feb 5th 2017', '9.5', '10g', 'N/A', true],
-        ];
+
+        $logs = Auth::user()->logs()->get();
 
         return view('main.log.index')
-            ->withRows($rows)
+            ->withLogs($logs)
             ->withTitle('Log History');
     }
 
@@ -31,12 +31,63 @@ class LogController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $mainLog = new Log();
+        $mainLog->time =
+            Carbon::createFromFormat('d F Y - H:i', $request->input('datetime'));
+        $mainLog->user_id = Auth::user()->id;
+        $mainLog->save();
+
+        if($request->has('bg'))
+        {
+            $bg = new BloodSugar();
+            $bg->bg = $request->input('bg');
+            $mainLog->bg()->save($bg);
+            $this->attachNote($bg, 'bg-note', $request);
+        }
+
+        if($request->has('carbs'))
+        {
+            $carb = new Carb();
+            $carb->carbs = $request->input('carbs');
+            $mainLog->carb()->save($carb);
+            $this->attachNote($carb, 'carb-note', $request);
+        }
+
+        if($request->has('insulin'))
+        {
+            $insulinAmounts = $request->input('insulin');
+            $insulinTypes = $request->input('insulin-types');
+
+            for($i = 0; $i < count($insulinAmounts); $i++)
+            {
+                $insulin = new Medication();
+                $insulin->amount = $insulinAmounts[$i];
+                $insulin->type = $insulinTypes[$i];
+                $mainLog->medications()->save($insulin);
+                $this->attachNote($insulin, 'medication-note', $request);
+
+            }
+        }
+
+        if($request->has('exercise'))
+        {
+            $exercise = new Exercise();
+            $exercise->minutes =  $request->input('exercise');
+            $exercise->difficulty = $request->input('exercise-intensity');
+            $mainLog->exercise()->save($exercise);
+            $this->attachNote($exercise, 'exercise-note', $request);
+        }
+
+        $this->attachNote($mainLog, 'additional-notes', $request);
+        return back();
     }
 
     public function show($id)
     {
-        //
+        $log = Log::where('id', $id)->attached()->first();
+        return view('main.log.show')
+            ->withLog($log)
+            ->withTitle('Log Entry From ' . $log->time);
     }
 
     public function edit($id)
@@ -52,5 +103,15 @@ class LogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function attachNote($obj, $noteName, $request)
+    {
+        if($request->has($noteName))
+        {
+            $note = new Note();
+            $note->text = $request->input($noteName);
+            $obj->notes()->save($note);
+        }
     }
 }

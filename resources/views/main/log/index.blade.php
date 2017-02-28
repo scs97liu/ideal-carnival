@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @each('main.log.table_overview', $rows, 'row')
+                        @each('main.log.table_overview', $logs, 'log')
                     </tbody>
                 </table>
             </div>

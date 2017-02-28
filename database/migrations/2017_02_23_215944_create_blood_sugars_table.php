@@ -18,6 +18,8 @@ class CreateBloodSugarsTable extends Migration
             $table->integer('log_id')->unsigned();
             $table->float('bg');
             $table->timestamps();
+
+            $table->foreign('log_id')->references('id')->on('logs');
         });
     }
 

@@ -117,4 +117,19 @@ elixir(mix => {
         themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js',
         themePath + 'global/plugins/bootstrap-modal/js/bootstrap-modal.js'
     ], 'public/js/modals.js');
+
+    mix.combine([
+        themePath + 'global/plugins/codemirror/lib/codemirror.css',
+        themePath + 'global/plugins/codemirror/theme/neat.css',
+        themePath + 'global/plugins/codemirror/theme/ambiance.css',
+        themePath + 'global/plugins/codemirror/theme/material.css',
+        themePath + 'global/plugins/codemirror/theme/neo.css',
+    ], 'public/css/code.css');
+
+    mix.combine([
+        themePath + 'global/plugins/codemirror/lib/codemirror.js',
+        themePath + 'global/plugins/codemirror/mode/javascript/javascript.js',
+        themePath + 'global/plugins/codemirror/mode/htmlmixed/htmlmixed.js',
+        themePath + 'global/plugins/codemirror/mode/css/css.js',
+    ], 'public/js/code.js');
 });

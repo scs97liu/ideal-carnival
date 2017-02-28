@@ -15,10 +15,12 @@ class CreateMedicationsTable extends Migration
     {
         Schema::create('medications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('log_id');
+            $table->integer('log_id')->unsigned();
             $table->string('type');
             $table->float('amount');
             $table->timestamps();
+
+            $table->foreign('log_id')->references('id')->on('logs');
         });
     }
 

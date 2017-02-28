@@ -15,9 +15,13 @@ class CreateExercisesTable extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('log_id')->unsigned();
             $table->string('difficulty');
             $table->integer('minutes');
             $table->timestamps();
+
+            $table->foreign('log_id')->references('id')->on('logs');
+
         });
     }
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise extends Model
+class Carb extends Model
 {
     public function log()
     {

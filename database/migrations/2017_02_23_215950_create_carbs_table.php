@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionsTable extends Migration
+class CreateCarbsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('carbs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('given_by')->unsigned();
-            $table->integer('received_by')->unsigned();
+            $table->integer('log_id')->unsigned();
+            $table->integer('carbs');
             $table->timestamps();
+
+            $table->foreign('log_id')->references('id')->on('logs');
         });
     }
 
@@ -28,6 +30,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('carbs');
     }
 }
