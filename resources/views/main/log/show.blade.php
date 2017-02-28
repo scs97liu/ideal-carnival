@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     @endif
-                    @if($log->notes)
+                    @if(count($log->notes))
                         <h4 class="block">Additional Notes</h4>
                         <div class="row">
                             <div class="col-sm-4">

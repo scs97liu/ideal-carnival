@@ -17,7 +17,7 @@ class LogController extends Controller
     public function index()
     {
 
-        $logs = Auth::user()->logs()->get();
+        $logs = Auth::user()->logs()->orderBy('time', 'desc')->get();
 
         return view('main.log.index')
             ->withLogs($logs)
@@ -31,6 +31,7 @@ class LogController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
         $mainLog = new Log();
         $mainLog->time =
             Carbon::createFromFormat('d F Y - H:i', $request->input('datetime'));
@@ -53,7 +54,7 @@ class LogController extends Controller
             $this->attachNote($carb, 'carb-note', $request);
         }
 
-        if($request->has('insulin'))
+        if($request->input('insulin')[0])
         {
             $insulinAmounts = $request->input('insulin');
             $insulinTypes = $request->input('insulin-types');
@@ -79,7 +80,8 @@ class LogController extends Controller
         }
 
         $this->attachNote($mainLog, 'additional-notes', $request);
-        return back();
+        $historyLink = '<a href="' . route('log.index') . '">here</a>';
+        return back()->with('success', 'Added new log! Go to your history ' . $historyLink);
     }
 
     public function show($id)
