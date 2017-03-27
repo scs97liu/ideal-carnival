@@ -96,16 +96,9 @@ elixir(mix => {
     ], 'public/js/datetime.js');
 
     mix.combine([
-        themePath + 'global/plugins/amcharts/amcharts/amcharts.js',
-        themePath + 'global/plugins/amcharts/amcharts/serial.js',
-        themePath + 'global/plugins/amcharts/amcharts/pie.js',
-        themePath + 'global/plugins/amcharts/amcharts/radar.js',
-        themePath + 'global/plugins/amcharts/amcharts/themes/light.js',
-        themePath + 'global/plugins/amcharts/amcharts/themes/patterns.js',
-        themePath + 'global/plugins/amcharts/amcharts/themes/chalk.js',
-        themePath + 'global/plugins/amcharts/ammap/ammap.js',
-        themePath + 'global/plugins/amcharts/ammap/maps/js/worldLow.js',
-        themePath + 'global/plugins/amcharts/amstockcharts/amstock.js'
+       themePath + 'global/plugins/highcharts/js/highcharts.js',
+       themePath + 'global/plugins/highcharts/js/highcharts-3d.js',
+       themePath + 'global/plugins/highcharts/js/highcharts-more.js'
     ], 'public/js/graphs.js');
 
     mix.combine([

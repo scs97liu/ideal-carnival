@@ -5,104 +5,55 @@
 @endpush
 
 @section('content')
-    <input style="margin-bottom: 20px" class="form-control form-control-inline input-large date-picker" size="8" type="text" value="" placeholder="Jump To Date"/>
     <div class="portlet box">
         <div class="portlet-body">
-            <div id="chart_1" class="chart" style="height: 500px;"> </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group" id="defaultrange">
+                        <input type="text" class="form-control" placeholder="Change Date Range">
+                        <span class="input-group-btn">
+                        <button class="btn default date-range-toggle" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
     </div>
+    <form id="range-form">
+        <input type="hidden" id="range-start" name="start">
+        <input type="hidden" id="range-end" name="end">
+    </form>
 @endsection
 
 @push('js')
     <script src="{{ asset('/js/graphs.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/datetime.js') }}" type="text/javascript"></script>
     <script>
-        $('.date-picker').datepicker({
-            orientation: "left",
-            autoclose: true
-        });
-        var chart = AmCharts.makeChart("chart_1", {
-            "type": "serial",
-            "categoryField": "category",
-            "categoryAxis": {
-                "gridPosition": "start"
+        $('#defaultrange').daterangepicker({
+                opens: (App.isRTL() ? 'left' : 'right'),
+                format: 'DD/MM/YYYY',
+                separator: ' to ',
+                startDate: moment().subtract('days', 29),
+                endDate: moment(),
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                    'Last 7 Days': [moment().subtract('days', 6), moment()],
+                    'Last 30 Days': [moment().subtract('days', 29), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                },
             },
-            "trendLines": [],
-            "graphs": [
-                {
-                    "balloonText": "[[title]] of [[category]]:[[value]]",
-                    "bullet": "round",
-                    "id": "AmGraph-1",
-                    "title": "Average",
-                    "valueField": "column-1"
-                }
-            ],
-            "guides": [
-                {
-                    "fillAlpha": 0.3,
-                    "fillColor": "#E10E0E",
-                    "id": "Guide-1",
-                    "toValue": 99,
-                    "value": 10
-                },
-                {
-                    "fillAlpha": 0.31,
-                    "fillColor": "#58A3F9",
-                    "id": "Guide-2",
-                    "toValue": 4,
-                    "value": 0
-                }
-            ],
-            "valueAxes": [
-                {
-                    "id": "ValueAxis-1",
-                    "title": "Blood Sugars (mmol/l)"
-                },
-                {
-                    "id": "ValueAxis-2",
-                    "position": "bottom",
-                    "title": "Date"
-                }
-            ],
-            "allLabels": [],
-            "balloon": {},
-            "titles": [
-                {
-                    "id": "Title-1",
-                    "size": 15,
-                    "text": "Daily Average Blood Sugars for January 31st-February 6th"
-                }
-            ],
-            "dataProvider": [
-                {
-                    "category": "Jan 31",
-                    "column-1": "5.3"
-                },
-                {
-                    "category": "Feb 1",
-                    "column-1": "6.7"
-                },
-                {
-                    "category": "Feb 2",
-                    "column-1": "7.3"
-                },
-                {
-                    "category": "Feb 3",
-                    "column-1": "11.4"
-                },
-                {
-                    "category": "Feb 4",
-                    "column-1": "9.0"
-                },
-                {
-                    "category": "Feb 5",
-                    "column-1": "3.6"
-                },
-                {
-                    "category": "Feb 6",
-                    "column-1": "6.2"
-                }
-            ]
-        });
+            function (start, end) {
+                $('#range-start').val(start.format('YYYY-MM-DD'))
+                $('#range-end').val(end.format('YYYY-MM-DD'))
+                $('#range-form').submit()
+            }
+        )
     </script>
+    @include('main.graph._' . $type)
 @endpush

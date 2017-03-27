@@ -2,10 +2,22 @@
 
 namespace App;
 
+use App\Presenter\PresentableTrait;
+use App\Presenter\Presenters\LogPresenter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model
 {
+    use PresentableTrait;
+
+    protected $presenter = LogPresenter::class;
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'time'
+    ];
+
     public function bg()
     {
         return $this->hasOne(BloodSugar::class);
@@ -34,5 +46,25 @@ class Log extends Model
     public function scopeAttached($query)
     {
         return $query->with('bg.notes', 'carb.notes', 'exercise.notes', 'medications.notes', 'notes');
+    }
+
+    public function scopeRange($query, $begin, $end)
+    {
+        return $query->where('time', '>', $begin)->where('time', '<', $end);
+    }
+
+    public function scopeToday($query)
+    {
+        return $this->scopeRange($query, Carbon::today(), Carbon::tomorrow());
+    }
+
+    public function scopeWeek($query)
+    {
+        return $this->scopeRange($query, Carbon::today()->addWeek(-1), Carbon::tomorrow());
+    }
+
+    public function scopeMonth($query)
+    {
+        return $this->scopeRange($query, Carbon::today()->addMonth(-1), Carbon::tomorrow());
     }
 }
