@@ -11,7 +11,7 @@
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
                                     <input type="number" min="0" step="0.1" class="form-control" value="8.0">
-                                    <span class="input-group-addon" id="sizing-addon1">mmol/l</span>
+                                    <span class="input-group-addon" id="sizing-addon1">{{ $user->getSetting('preferred_units', 'mmol/l') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
                                     <input type="number" min="0" step="0.1" class="form-control" value="4.0">
-                                    <span class="input-group-addon" id="sizing-addon1">mmol/l</span>
+                                    <span class="input-group-addon" id="sizing-addon1">{{ $user->getSetting('preferred_units', 'mmol/l') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -32,17 +32,9 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <select class="form-control input-lg">
-                                    <option selected>mmol/l</option>
-                                    <option >mg/dl</option>
+                                    <option {{ $user->getSetting('preferred_units', 'mmol/l') === 'mmol/l' ? 'selected' : '' }}>mmol/l</option>
+                                    <option {{ $user->getSetting('preferred_units', 'mg/dl') === 'mg/dl' ? 'selected' : '' }}>mg/dl</option>
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="block">Insulin Types</h4>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-lg">
-                                <input type="text" class="form-control" value="NovoRapid">
                             </div>
                         </div>
                     </div>

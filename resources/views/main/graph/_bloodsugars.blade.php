@@ -17,15 +17,15 @@
         },
         yAxis: {
             title: {
-                text: 'Blood Sugar (mmol/l)'
+                text: 'Blood Sugar ({{ $user->getSetting('preferred_units', 'mmol/l') }})'
             },
             plotBands: [{
-                from: 8.0,
+                from: {{ $user->getSetting('high_target', 10) }},
                 to: 100.0,
                 color: 'rgba(255, 170, 213, .2)'
             },{
                 from: 0.0,
-                to: 4.0,
+                to: {{ $user->getSetting('low_target', 4) }},
                 color: 'rgba(68, 170, 213, .2)'
             }],
             minRange: 20,
@@ -36,7 +36,7 @@
         tooltip: {
             shared: true,
             crosshairs: true,
-            valueSuffix: 'mmol/l'
+            valueSuffix: '{{ $user->getSetting('preferred_units', 'mmol/l') }}'
         },
         plotOptions: {
             series: {
@@ -54,7 +54,7 @@
             }
         },
         series: [{
-            name: 'Blood Sugar (mmol/l)',
+            name: 'Blood Sugar ({{ $user->getSetting('preferred_units', 'mmol/l') }})',
             marker: {
                 radius: 4
             },

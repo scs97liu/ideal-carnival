@@ -35,7 +35,48 @@ class HomeController extends Controller
         $highPercentage = round(($highCount / $total) * 100, 0);
         $lowPercentage = round(($lowCount / $total) * 100, 0);
         $insulinTotal = $this->insulinTotal($user);
-        return view('main.home')
+        $recent = $this->recent($user);
+
+        $logs = Auth::user()->logs()
+            ->week()
+            ->attached()
+            ->orderBy('time', 'asc')
+            ->get();
+
+        $byDate = $logs->groupBy(function($item, $key){
+            return $item->time->format('Y-m-d');
+        });
+
+        foreach($byDate as $key => $value)
+        {
+            $average = new Average();
+            foreach($value as $log)
+            {
+                $average->addValue($log->bg->bg);
+            }
+            $timestamp = Carbon::createFromFormat('Y-m-d', $key, 'UTC')
+                    ->setTime(0,0)->timestamp * 1000;
+            $ranges[] = [
+                'x' => $timestamp,
+                'low' => $average->getLow(),
+                'high' => $average->getHigh()
+            ];
+            $averages[] = [
+                'x' => $timestamp,
+                'y' => $average->getAverage(),
+                'url' => route('graph.bg', ['start' => $key, 'end' => $key])
+            ];
+            $table[] = [
+                'date' => $key,
+                'average' => $average->getAverage(),
+                'low' => $average->getLow(),
+                'high' => $average->getHigh(),
+                'url' => route('graph.bg', ['start' => $key, 'end' => $key])
+            ];
+        }
+
+
+        return view('main.home.home')
             ->withTitle('Dashboard')
             ->withAverage($fourteenDays)
             ->withPercentage($percentage)
@@ -43,7 +84,10 @@ class HomeController extends Controller
             ->withLowCount($lowCount)
             ->withHighPercentage($highPercentage)
             ->withLowPercentage($lowPercentage)
-            ->withInsulinTotal($insulinTotal);
+            ->withInsulinTotal($insulinTotal)
+            ->withRecent($recent)
+            ->withRanges(json_encode($ranges))
+            ->withAverages(json_encode($averages));
     }
 
     private function fourteenAverage($user)
@@ -94,5 +138,21 @@ class HomeController extends Controller
         }
 
         return $total;
+    }
+
+    private function recent($user)
+    {
+        $rows = [];
+        $logs = $user->logs()
+            ->range(Carbon::now()->subMonth(1), Carbon::now())
+            ->orderBy('time', 'desc')
+            ->attached()
+            ->limit(50)
+            ->get();
+        foreach($logs as $log)
+        {
+            $rows = array_merge($rows, $log->present()->forDashboard());
+        }
+        return $rows;
     }
 }

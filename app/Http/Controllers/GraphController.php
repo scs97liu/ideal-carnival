@@ -31,11 +31,19 @@ class GraphController extends Controller
                 ->setTime(0, 0);
             $end = Carbon::createFromFormat('Y-m-d', $request->get('end'))
                 ->setTime(0, 0);
-            $logs = Auth::user()->logs()->range($start, $end->copy()->addDay())->attached()->get();
+            $logs = Auth::user()->logs()
+                ->range($start, $end->copy()->addDay())
+                ->attached()
+                ->orderBy('time', 'asc')
+                ->get();
         } else {
             $start = Carbon::today();
             $end = Carbon::tomorrow();
-            $logs = Auth::user()->logs()->today()->attached()->get();
+            $logs = Auth::user()->logs()
+                ->today()
+                ->attached()
+                ->orderBy('time', 'asc')
+                ->get();
         }
 
         $dataPoints = $logs->map(function($log){
@@ -70,11 +78,19 @@ class GraphController extends Controller
                 ->setTime(0, 0);
             $end = Carbon::createFromFormat('Y-m-d', $request->get('end'), 'UTC')
                 ->setTime(0, 0);
-            $logs = Auth::user()->logs()->range($start, $end->copy()->addDay())->attached()->get();
+            $logs = Auth::user()->logs()
+                ->range($start, $end->copy()->addDay())
+                ->attached()
+                ->orderBy('time', 'asc')
+                ->get();
         } else {
             $start = Carbon::today()->addMonths(-1);
             $end = Carbon::today();
-            $logs = Auth::user()->logs()->month()->attached()->get();
+            $logs = Auth::user()->logs()
+                ->month()
+                ->attached()
+                ->orderBy('time', 'asc')
+                ->get();
         }
 
         $byDate = $logs->groupBy(function($item, $key){

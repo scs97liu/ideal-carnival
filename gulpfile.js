@@ -72,9 +72,6 @@ elixir(mix => {
     mix.combine([
         themePath + 'global/plugins/counterup/jquery.waypoints.min.js',
         themePath + 'global/plugins/counterup/jquery.counterup.js',
-        themePath + 'global/plugins/flot/jquery.flot.js',
-        themePath + 'global/plugins/flot/jquery.flot.resize.js',
-        themePath + 'global/plugins/flot/jquery.flot.categories.js'
     ], 'public/js/dashboard.js');
 
 
