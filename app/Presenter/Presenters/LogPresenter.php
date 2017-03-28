@@ -7,6 +7,7 @@ use App\Medication;
 use App\Presenter\Presenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class LogPresenter extends Presenter
 {
@@ -54,7 +55,8 @@ class LogPresenter extends Presenter
         switch (get_class($object))
         {
             case BloodSugar::class:
-                return ['bg', $object->bg . ' mmol/l', $humanTime, 'label-success', 'fa-tint', route('log.show', $this->entity->id)];
+                $preferredUnits = Auth::user()->getSetting('preferred_units', 'mmol/l');
+                return ['bg', $object->bg . ' ' . $preferredUnits, $humanTime, 'label-success', 'fa-tint', route('log.show', $this->entity->id)];
                 break;
             case Carb::class:
                 return ['carb', $object->carbs . 'g', $humanTime, 'label-info', 'fa-cutlery', route('log.show', $this->entity->id)];

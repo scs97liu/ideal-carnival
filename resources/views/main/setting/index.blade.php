@@ -10,7 +10,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="number" min="0" step="0.1" class="form-control" value="8.0">
+                                    <input type="number" min="0" step="0.1" class="form-control" value="{{ $user->getSetting('high_target', 8) }}">
                                     <span class="input-group-addon" id="sizing-addon1">{{ $user->getSetting('preferred_units', 'mmol/l') }}</span>
                                 </div>
                             </div>
@@ -21,7 +21,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="number" min="0" step="0.1" class="form-control" value="4.0">
+                                    <input type="number" min="0" step="0.1" class="form-control" value="{{ $user->getSetting('low_target', 8) }}">
                                     <span class="input-group-addon" id="sizing-addon1">{{ $user->getSetting('preferred_units', 'mmol/l') }}</span>
                                 </div>
                             </div>
@@ -32,20 +32,10 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <select class="form-control input-lg">
-                                    <option {{ $user->getSetting('preferred_units', 'mmol/l') === 'mmol/l' ? 'selected' : '' }}>mmol/l</option>
-                                    <option {{ $user->getSetting('preferred_units', 'mg/dl') === 'mg/dl' ? 'selected' : '' }}>mg/dl</option>
+                                    <option {{ $user->getSetting('preferred_units', null) === 'mmol/l' ? 'selected' : '' }}>mmol/l</option>
+                                    <option {{ $user->getSetting('preferred_units', null) === 'mg/dl' ? 'selected' : '' }}>mg/dl</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row margin-top-10">
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-lg">
-                                <input type="text" class="form-control" value="Lantus">
-                            </div>
-                        </div>
-                        <div class="col-sm-1">
-                            <button class="btn btn-lg blue" type="button"  data-target="#full-width" data-toggle="modal"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                     <h4 class="block">Additional Notes</h4>

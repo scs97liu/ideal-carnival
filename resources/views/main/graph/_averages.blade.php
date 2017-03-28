@@ -14,7 +14,7 @@
             },
             plotBands: [{
                 from: {{ $user->getSetting('high_target', 10) }},
-                to: 100.0,
+                to: 500.0,
                 color: 'rgba(255, 170, 213, .2)'
             },{
                 from: 0.0,

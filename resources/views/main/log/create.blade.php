@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
                                     <input type="number" min="0" step="0.1" name="bg" class="form-control">
-                                    <span class="input-group-addon" id="sizing-addon1">mmol/l</span>
+                                    <span class="input-group-addon" id="sizing-addon1">{{ $user->getSetting('preferred_units', null) }}</span>
                                 </div>
                             </div>
                         </div>

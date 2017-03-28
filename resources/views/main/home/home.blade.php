@@ -17,7 +17,7 @@
                     <div class="number">
                         <h3 class="font-green-sharp">
                             <span data-counter="counterup" data-value="{{ $average }}">0</span>
-                            <small class="font-green-sharp">mmol/l</small>
+                            <small class="font-green-sharp">{{ $user->getSetting('preferred_units', null) }}</small>
                         </h3>
                         <small>14 Day Average</small>
                     </div>

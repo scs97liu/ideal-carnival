@@ -2,6 +2,8 @@
 
 trait SettingsTrait
 {
+
+    private $converted = [];
     /**
      * Boot the scope.
      *
@@ -44,11 +46,27 @@ trait SettingsTrait
     public function getSetting($name, $default = null)
     {
         $name = $this->getSettingsKey($name);
-
         if (array_key_exists($name, $this->attributes)) {
+            if($name === 'settings_low_target' || $name === 'settings_high_target')
+            {
+                $this->interceptForTargets($name);
+            }
             return $this->getAttributeValue($name);
         }
 
         return $default;
     }
+
+    private function interceptForTargets($name)
+    {
+        if($this->attributes['settings_preferred_units'] === 'mg/dl')
+        {
+            if(!in_array($name, $this->converted))
+            {
+                $this->attributes[$name] = $this->attributes[$name] * 18;
+                $this->converted[] = $name;
+            }
+        }
+    }
+
 }
