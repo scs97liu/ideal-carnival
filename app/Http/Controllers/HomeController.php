@@ -47,6 +47,10 @@ class HomeController extends Controller
             return $item->time->format('Y-m-d');
         });
 
+
+        $ranges = [];
+        $averages = [];
+        $table = [];
         foreach($byDate as $key => $value)
         {
             $average = new Average();
@@ -74,7 +78,6 @@ class HomeController extends Controller
                 'url' => route('graph.bg', ['start' => $key, 'end' => $key])
             ];
         }
-
 
         return view('main.home.home')
             ->withTitle('Dashboard')
@@ -110,14 +113,15 @@ class HomeController extends Controller
         $high = 0;
         $low = 0;
         $week = $user->logs()->week()->attached()->get();
+        $count = $week->count();
         foreach($week as $log)
         {
             $bg = $log->bg->bg;
             if($bg < $lowTarget) $low++;
-            if($bg > $lowTarget) $high++;
+            if($bg > $highTarget) $high++;
         }
 
-        return [$high, $low, $week->count()];
+        return [$high, $low, ($count) ?: 1];
     }
 
     private function insulinTotal($user)

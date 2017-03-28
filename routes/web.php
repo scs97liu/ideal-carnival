@@ -12,4 +12,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('graph', GraphController::class);
     Route::resource('communication', CommunicationController::class);
     Route::resource('setting', SettingController::class);
+    Route::get('tool', ['as' => 'tool.index', 'uses' => 'ToolController@index']);
+    Route::get('tool/import', ['as' => 'tool.import', 'uses' => 'ToolController@import']);
 });

@@ -87,8 +87,8 @@ class LogController extends Controller
     {
         $log = Log::where('id', $id)->attached()->first();
 
-        $start = $log->time->copy()->setTime(0, 0);
-        $end = $log->time->copy()->setTime(0, 0)->addDay();
+        $start = $log->time->copy()->addHours(-24);
+        $end = $log->time->copy()->addHours(24);
         $logs = Log::range($start, $end)
             ->attached()
             ->orderBy('time', 'asc')

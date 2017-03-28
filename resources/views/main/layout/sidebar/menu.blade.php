@@ -42,6 +42,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('tool.index') }}" class="nav-link">
+        <i class="fa fa-upload"></i>
+        <span class="title">Import / Export</span>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('setting.index') }}" class="nav-link">
         <i class="fa fa-cog"></i>
         <span class="title">Settings</span>

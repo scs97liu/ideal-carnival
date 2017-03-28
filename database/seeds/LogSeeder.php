@@ -27,7 +27,7 @@ class LogSeeder extends Seeder
                 $mainLog->save();
 
                 $bg = new BloodSugar();
-                $bg->bg = round($entry->bgInput, 1);
+                $bg->bg = round($entry->bgInput * 0.6, 1);
                 $mainLog->bg()->save($bg);
 
                 $carb = new Carb();

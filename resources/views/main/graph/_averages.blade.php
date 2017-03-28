@@ -22,6 +22,7 @@
                 color: 'rgba(68, 170, 213, .2)'
             }],
             minRange: 20,
+            min: 0
         },
 
         tooltip: {
