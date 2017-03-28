@@ -31,7 +31,6 @@ class LogController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
         $mainLog = new Log();
         $mainLog->time =
             Carbon::createFromFormat('d F Y - H:i', $request->input('datetime'));
@@ -114,7 +113,14 @@ class LogController extends Controller
 
     public function destroy($id)
     {
-        //
+        $log = Log::where('id', $id)->get()->first();
+        $log->bg()->delete();
+        $log->carb()->delete();
+        $log->exercise()->delete();
+        $log->medications()->delete();
+        $log->notes()->delete();
+        $log->delete();
+        return redirect()->back()->withSuccess('Successfully deleted log');
     }
 
     private function attachNote($obj, $noteName, $request)

@@ -6,6 +6,7 @@ use App\Average;
 use App\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GraphController extends Controller
 {
@@ -30,11 +31,11 @@ class GraphController extends Controller
                 ->setTime(0, 0);
             $end = Carbon::createFromFormat('Y-m-d', $request->get('end'))
                 ->setTime(0, 0);
-            $logs = Log::range($start, $end->copy()->addDay())->attached()->get();
+            $logs = Auth::user()->logs()->range($start, $end->copy()->addDay())->attached()->get();
         } else {
             $start = Carbon::today();
             $end = Carbon::tomorrow();
-            $logs = Log::today()->attached()->get();
+            $logs = Auth::user()->logs()->today()->attached()->get();
         }
 
         $dataPoints = $logs->map(function($log){
@@ -69,11 +70,11 @@ class GraphController extends Controller
                 ->setTime(0, 0);
             $end = Carbon::createFromFormat('Y-m-d', $request->get('end'), 'UTC')
                 ->setTime(0, 0);
-            $logs = Log::range($start, $end->copy()->addDay())->attached()->get();
+            $logs = Auth::user()->logs()->range($start, $end->copy()->addDay())->attached()->get();
         } else {
-            $start = Carbon::today();
-            $end = Carbon::today()->addMonth();
-            $logs = Log::month()->attached()->get();
+            $start = Carbon::today()->addMonths(-1);
+            $end = Carbon::today();
+            $logs = Auth::user()->logs()->month()->attached()->get();
         }
 
         $byDate = $logs->groupBy(function($item, $key){

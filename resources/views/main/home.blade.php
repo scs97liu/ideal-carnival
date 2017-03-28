@@ -7,7 +7,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-green-sharp">
-                            <span data-counter="counterup" data-value="5.4">0</span>
+                            <span data-counter="counterup" data-value="{{ $average }}">0</span>
                             <small class="font-green-sharp">mmol/l</small>
                         </h3>
                         <small>14 Day Average</small>
@@ -18,8 +18,8 @@
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                        <span style="width: 54%;" class="progress-bar progress-bar-success green-sharp">
-                            <span class="sr-only">76% progress</span>
+                        <span style="width: {{ $percentage }}%;" class="progress-bar progress-bar-success green-sharp">
+                            <span class="sr-only">{{ $percentage }}% progress</span>
                         </span>
                     </div>
                     <div class="status">
@@ -34,7 +34,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-red-haze">
-                            <span data-counter="counterup" data-value="52">0</span>
+                            <span data-counter="counterup" data-value="{{ $insulin_total }}">0</span>
                             <small class="font-red-haze">U</small>
                         </h3>
                         <small>Yesterday's Insulin Totals</small>
@@ -45,11 +45,11 @@
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                        <span style="width: 50%;" class="progress-bar progress-bar-success red-haze">
-                            <span class="sr-only">50% change</span>
+                        <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+                            <span class="sr-only">100% change</span>
                         </span>
-                        <span style="width: 50%;" class="progress-bar progress-bar-success purple-wisteria">
-                            <span class="sr-only">50% change</span>
+                        <span style="width: 0%;" class="progress-bar progress-bar-success purple-wisteria">
+                            <span class="sr-only">0% change</span>
                         </span>
                     </div>
                     <div class="status">
@@ -64,7 +64,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-blue-sharp">
-                            <span data-counter="counterup" data-value="2">0</span>
+                            <span data-counter="counterup" data-value="{{ $low_count }}">0</span>
                         </h3>
                         <small>LOW BG THIS WEEK</small>
                     </div>
@@ -74,13 +74,13 @@
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                        <span style="width: 2%;" class="progress-bar progress-bar-success blue-sharp">
-                            <span class="sr-only">2% grow</span>
+                        <span style="width: {{ $low_percentage }}%;" class="progress-bar progress-bar-success blue-sharp">
+                            <span class="sr-only">{{ $low_percentage }}% grow</span>
                         </span>
                     </div>
                     <div class="status">
                         <div class="status-title"> Amount </div>
-                        <div class="status-number"> 1% </div>
+                        <div class="status-number"> {{ $low_percentage }}% </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-purple-soft">
-                            <span data-counter="counterup" data-value="4">0</span>
+                            <span data-counter="counterup" data-value="{{ $high_count }}">0</span>
                         </h3>
                         <small>HIGH BG THIS WEEK</small>
                     </div>
@@ -100,13 +100,13 @@
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                        <span style="width: 4%;" class="progress-bar progress-bar-success purple-soft">
-                            <span class="sr-only">5% change</span>
+                        <span style="width: {{ $high_percentage }}%;" class="progress-bar progress-bar-success purple-soft">
+                            <span class="sr-only">{{ $high_percentage }}% change</span>
                         </span>
                     </div>
                     <div class="status">
                         <div class="status-title"> Amount </div>
-                        <div class="status-number"> 2% </div>
+                        <div class="status-number"> {{ $high_percentage }}% </div>
                     </div>
                 </div>
             </div>

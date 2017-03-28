@@ -45,7 +45,8 @@ class Log extends Model
 
     public function scopeAttached($query)
     {
-        return $query->with('bg.notes', 'carb.notes', 'exercise.notes', 'medications.notes', 'notes');
+        return $query->with('bg.notes', 'carb.notes', 'exercise.notes', 'medications.notes', 'notes')
+            ->orderBy('time', 'asc');
     }
 
     public function scopeRange($query, $begin, $end)

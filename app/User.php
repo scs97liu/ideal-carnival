@@ -4,12 +4,13 @@ namespace App;
 
 use App\Presenter\PresentableTrait;
 use App\Presenter\Presenters\UserPresenter;
+use App\Scopes\SettingsTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, PresentableTrait;
+    use Notifiable, PresentableTrait, SettingsTrait;
 
     protected $presenter = UserPresenter::class;
 
@@ -34,5 +35,10 @@ class User extends Authenticatable
     public function logs()
     {
         return $this->hasMany(Log::class);
+    }
+
+    public function preferences()
+    {
+        return $this->hasOne(Preferences::class);
     }
 }

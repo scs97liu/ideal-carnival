@@ -36,9 +36,22 @@
             <a href="#" class="btn dark btn-sm btn-outline sbold uppercase">
                 <i class="fa fa-pencil"></i> Edit
             </a>
-            <a href="#" class="btn dark btn-sm btn-outline sbold uppercase">
+            <a href="javascript:;" class="btn dark btn-sm btn-outline sbold uppercase delete-log" data-log="{{ $log->id }}">
                 <i class="fa fa-trash"></i> Delete
             </a>
+            <form action="{{ route('log.destroy', $log->id) }}" method="POST">
+                {{ method_field('DELETE') }}
+            </form>
         </div>
     </td>
 </tr>
+
+@push('js')
+    <script>
+        $('.delete-log').off().click(function(event){
+            if(confirm('Do you wish to delete this log? This cannot be undone')){
+                $(this).next('form').submit()
+            }
+        })
+    </script>
+@endpush
