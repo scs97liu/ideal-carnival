@@ -26,13 +26,14 @@ class BloodSugar extends Model
 
     public function setBgAttribute($value)
     {
-        $preferredUnits = Auth::user()->getSetting('preferred_units', 'mmol/l');
-        if($preferredUnits === 'mmol/l')
-        {
-            $this->attributes['bg'] = $value;
-            return;
-        } else {
-            $this->attributes['bg'] = round($value / 18, 1);
+        if(Auth::check()){
+            $preferredUnits = Auth::user()->getSetting('preferred_units', 'mmol/l');
+            if ($preferredUnits === 'mmol/l') {
+                $this->attributes['bg'] = $value;
+                return;
+            } else {
+                $this->attributes['bg'] = round($value / 18, 1);
+            }
         }
     }
 }
