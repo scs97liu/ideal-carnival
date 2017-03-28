@@ -24,7 +24,7 @@ class Average
         if($this->low === null || $this->low > $value) $this->low = $value;
         $this->values[] = $value;
         $this->count++;
-        $this->average = $this->total() / $this->count;
+        $this->average = round($this->total() / $this->count,   1);
     }
 
     private function total()

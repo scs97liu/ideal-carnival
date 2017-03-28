@@ -24,7 +24,7 @@
             <div class="page-content">
                 {{--@include('main.layout.breadcrumbs')--}}
                 @include('main.layout.alert')
-                <h1 class="page-title">{{ $title or 'Title' }}</h1>
+                <h1 class="page-title">{!! $title or 'Title' !!}</h1>
                 @yield('content')
             </div>
         </div>

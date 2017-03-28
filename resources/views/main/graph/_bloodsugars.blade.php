@@ -35,7 +35,8 @@
         },
         tooltip: {
             shared: true,
-            crosshairs: true
+            crosshairs: true,
+            valueSuffix: 'mmol/l'
         },
         plotOptions: {
             series: {

@@ -87,9 +87,19 @@ class LogController extends Controller
     public function show($id)
     {
         $log = Log::where('id', $id)->attached()->first();
+
+        $start = $log->time->copy()->setTime(0, 0);
+        $end = $log->time->copy()->setTime(0, 0)->addDay();
+        $logs = Log::range($start, $end)->attached()->get();
+        $dataPoints = $logs->map(function($log){
+            return $log->present()->chartDataPoint();
+        });
+
+
         return view('main.log.show')
             ->withLog($log)
-            ->withTitle('Log Entry From ' . $log->time);
+            ->withTitle('Log Entry From ' . $log->time)
+            ->withData($dataPoints->toJson());
     }
 
     public function edit($id)

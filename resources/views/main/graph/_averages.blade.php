@@ -1,24 +1,16 @@
 <script>
-    $('.date-picker').datepicker({
-        orientation: "left",
-        autoclose: true
-    });
-
     $('#container').highcharts({
-        chart: {
-            type: 'line'
-        },
         title: {
             text: null
         },
+
         xAxis: {
-            type: 'datetime',
-            minRange: 7 * 24 * 60 * 60 * 1000,
-            tickInterval: 24 * 60 * 60 * 1000
+            type: 'datetime'
         },
+
         yAxis: {
             title: {
-                text: 'Exchange rate'
+                text: 'Blood Sugar (mmol/l)'
             },
             plotBands: [{
                 from: 8.0,
@@ -31,25 +23,49 @@
             }],
             minRange: 20,
         },
+
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            valueSuffix: 'mmol/l'
+        },
+
         legend: {
             enabled: false
         },
-        tooltip: {
-            shared: true,
-            crosshairs: true
-        },
         plotOptions: {
-            cursor: 'pointer',
-            marker: {
-                lineWidth: 1
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function (e) {
+                            window.location.href = this.url;
+                        }
+                    }
+                },
+                marker: {
+                    lineWidth: 1
+                }
             }
         },
         series: [{
-            name: 'Blood Sugars',
+            name: 'Average',
+            data: {!! $averages !!},
+            zIndex: 1,
             marker: {
-                radius: 4
-            },
-            data: {{ $data }}
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[0]
+            }
+        }, {
+            name: 'Range',
+            data: {!! $ranges !!},
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: Highcharts.getOptions().colors[0],
+            fillOpacity: 0.3,
+            zIndex: 0
         }]
     });
 </script>

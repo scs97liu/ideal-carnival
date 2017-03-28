@@ -2,6 +2,15 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/css/datetime.css') }}">
+    <style>
+        .log-overview div {
+            float: left;
+        }
+
+        .table {
+            margin-top: 25px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -21,6 +30,7 @@
             </div>
             <hr>
             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            @include('main.graph._' . $type . '_table')
         </div>
     </div>
     <form id="range-form">
@@ -37,8 +47,8 @@
                 opens: (App.isRTL() ? 'left' : 'right'),
                 format: 'DD/MM/YYYY',
                 separator: ' to ',
-                startDate: moment().subtract('days', 29),
-                endDate: moment(),
+                startDate: moment({{ $start }}, 'x'),
+                endDate: moment({{ $end }}, 'x'),
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],

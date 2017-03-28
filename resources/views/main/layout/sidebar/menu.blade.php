@@ -17,10 +17,23 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('graph.index') }}" class="nav-link">
+    <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-line-chart"></i>
         <span class="title">Graphs & Summaries</span>
+        <span class="arrow "></span>
     </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="{{ route('graph.bg') }}" class="nav-link ">
+                <span class="title">Blood Sugar Overview</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="{{ route('graph.average') }}" class="nav-link ">
+                <span class="title">Averages</span>
+            </a>
+        </li>
+    </ul>
 </li>
 <li class="nav-item">
     <a href="{{ route('communication.index') }}" class="nav-link">
