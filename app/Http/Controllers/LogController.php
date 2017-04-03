@@ -15,14 +15,39 @@ use Illuminate\Support\Facades\Auth;
 
 class LogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $start = '';
+        $end = '';
+        $logs = null;
+        $title = '';
 
-        $logs = Auth::user()->logs()->orderBy('time', 'desc')->get();
+        if($request->has('start') && $request->has('end'))
+        {
+            $start = Carbon::createFromFormat('Y-m-d', $request->get('start'), 'UTC')
+                ->setTime(0, 0);
+            $end = Carbon::createFromFormat('Y-m-d', $request->get('end'), 'UTC')
+                ->setTime(0, 0);
+            $logs = Auth::user()->logs()
+                ->range($start, $end->copy()->addDay())
+                ->attached()
+                ->orderBy('time', 'desc')
+                ->get();
+
+            $title = "<small>" . $start->format('M j, Y') . " - " . $end->format('M j, Y') . "</small>";
+        } else {
+            $logs = Auth::user()->logs()
+                ->attached()
+                ->orderBy('time', 'desc')
+                ->limit(100)
+                ->get();
+
+            $title = "<small>Last 100</small>";
+        }
 
         return view('main.log.index')
             ->withLogs($logs)
-            ->withTitle('Log History');
+            ->withTitle('Log History ' . $title);
     }
 
     public function create()
@@ -102,7 +127,7 @@ class LogController extends Controller
 
         return view('main.log.show')
             ->withLog($log)
-        ->withTitle('Log Entry - ' . $log->time->format('l j, F Y h:i:s A'))
+        ->withTitle('Log Entry - ' . $log->time->format('l F j Y - h:i A'))
             ->withData($dataPoints->toJson());
     }
 

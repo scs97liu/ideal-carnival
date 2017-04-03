@@ -1,5 +1,5 @@
 <tr>
-    <td> {{ $log->time }} </td>
+    <td> {{ $log->time->format('l F j Y - h:i A') }} </td>
     <td>
         <div class="row">
             <div class="col-xs-4">
