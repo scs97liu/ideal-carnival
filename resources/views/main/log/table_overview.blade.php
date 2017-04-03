@@ -1,5 +1,5 @@
 <tr>
-    <td> {{ $log->time->format('l F j Y - h:i A') }} </td>
+    <td> {{ $log->time->format('D F j Y - h:i A') }} </td>
     <td>
         <div class="row">
             <div class="col-xs-4">
@@ -33,7 +33,7 @@
             <a href="{{ route('log.show', $log->id) }}" class="btn dark btn-sm btn-outline sbold uppercase">
                 <i class="fa fa-search"></i> View
             </a>
-            <a href="#" class="btn dark btn-sm btn-outline sbold uppercase">
+            <a href="{{ route('log.edit', $log->id) }}" class="btn dark btn-sm btn-outline sbold uppercase">
                 <i class="fa fa-pencil"></i> Edit
             </a>
             <a href="javascript:;" class="btn dark btn-sm btn-outline sbold uppercase delete-log" data-log="{{ $log->id }}">
