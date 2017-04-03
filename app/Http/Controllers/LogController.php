@@ -11,6 +11,7 @@ use App\Medication;
 use App\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class LogController extends Controller
@@ -133,12 +134,86 @@ class LogController extends Controller
 
     public function edit($id)
     {
-        //
+        $log = Log::where('id', $id)->attached()->get()->first();
+        return view('main.log.edit')
+            ->withLog($log)
+            ->withTitle('Edit Log Entry');
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreLogEntry $request, $id)
     {
-        //
+        $log = Log::where('id', $id)->attached()->get()->first();
+        $bg = $this->getAttacheObject($log, 'bg', BloodSugar::class);
+        $carb = $this->getAttacheObject($log, 'carb', Carb::class);
+        $medication = $this->getAttacheObject($log, 'medications', Collection::class);
+        $exercise = $this->getAttacheObject($log, 'exercise', Exercise::class);
+        $notes = $this->getAttacheObject($log, 'notes', Collection::class);
+
+        if($request->has('bg'))
+        {
+            $bg->bg = $request->input('bg');
+            $bg->save();
+            $this->attachNote($bg, 'bg-note', $request);
+        } elseif($log->bg) {
+            $bg->delete();
+        }
+
+        if($request->has('carbs'))
+        {
+            $carb->carbs = $request->input('carbs');
+            $carb->save();
+            $this->attachNote($carb, 'carb-note', $request);
+        } elseif($log->carb) {
+            $carb->delete();
+        }
+
+        if($request->input('insulin')[0])
+        {
+            $insulinAmounts = $request->input('insulin');
+            $insulinTypes = $request->input('insulin-types');
+
+            for($i = 0; $i < count($insulinAmounts); $i++)
+            {
+                if($medication[$i])
+                {
+                    $insulin = $medication[$i];
+                    $insulin->amount = $insulinAmounts[$i];
+                    $insulin->type = $insulinTypes[$i];
+                    $insulin->save();
+                    $this->attachNote($insulin, 'medication-note', $request);
+                } else {
+                    $insulin = new Medication();
+                    $insulin->amount = $insulinAmounts[$i];
+                    $insulin->type = $insulinTypes[$i];
+                    $log->medications()->save($insulin);
+                    $this->attachNote($insulin, 'medication-note', $request);
+                }
+            }
+
+            while($i < count($medication))
+            {
+                $medication[$i]->delete();
+                $i++;
+            }
+        } elseif($log->medications) {
+            foreach($log->medications as $medication)
+            {
+                $medication->delete();
+            }
+        }
+
+        if($request->has('exercise'))
+        {
+            $exercise->minutes =  $request->input('exercise');
+            $exercise->difficulty = $request->input('exercise-intensity');
+            $exercise->save();
+            $this->attachNote($exercise, 'exercise-note', $request);
+        } elseif($log->exercise) {
+            $exercise->delete();
+        }
+
+
+        return redirect()->back()->withSuccess('Successfully updated log!');
     }
 
     public function destroy($id)
@@ -155,11 +230,37 @@ class LogController extends Controller
 
     private function attachNote($obj, $noteName, $request)
     {
+        if($obj->notes->first())
+        {
+            if($request->has($noteName))
+            {
+                $note = $obj->notes->first();
+                $note->text = $request->input($noteName);
+                $note->save();
+            } else {
+                $note = $obj->notes->first();
+                $note->delete();
+            }
+            return;
+        }
+
         if($request->has($noteName))
         {
             $note = new Note();
             $note->text = $request->input($noteName);
             $obj->notes()->save($note);
+        }
+    }
+
+    private function getAttacheObject($obj, $property, $class)
+    {
+        if($obj->{$property})
+        {
+            return $obj->{$property};
+        } else {
+            $newObj = new $class;
+            $newObj->log_id = $obj->id;
+            return $newObj;
         }
     }
 }

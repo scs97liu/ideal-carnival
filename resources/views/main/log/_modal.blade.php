@@ -9,8 +9,4 @@
         <textarea style="width:100%; height: 300px; display: none" class="log-note" name="exercise-note" id="exercise-note"></textarea>
         <textarea style="width:100%; height: 300px; display: none" class="log-note" name="medication-note" id="medication-note"></textarea>
     </div>
-    {{--<div class="modal-footer">--}}
-        {{--<button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>--}}
-        {{--<button type="button" class="btn green">Save changes</button>--}}
-    {{--</div>--}}
 </div>
