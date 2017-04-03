@@ -10,8 +10,9 @@
                     <div class="form-group">
                         <select class="form-control input-lg input-xlarge">
                             <option disabled selected>-- Select Medical Professional --</option>
-                            <option>Fast</option>
-                            <option>Slow</option>
+                            @foreach($connections as $connection)
+                                <option value="{{ $connection->id }}">{{ $connection->user->present()->fullName }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <h4 class="block">Message</h4>

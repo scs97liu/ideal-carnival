@@ -109,17 +109,13 @@ elixir(mix => {
     ], 'public/js/modals.js');
 
     mix.combine([
-        themePath + 'global/plugins/codemirror/lib/codemirror.css',
-        themePath + 'global/plugins/codemirror/theme/neat.css',
-        themePath + 'global/plugins/codemirror/theme/ambiance.css',
-        themePath + 'global/plugins/codemirror/theme/material.css',
-        themePath + 'global/plugins/codemirror/theme/neo.css',
-    ], 'public/css/code.css');
+        themePath + 'global/plugins/select2/js/select2.full.min.js'
+    ], 'public/js/forms.js');
 
     mix.combine([
-        themePath + 'global/plugins/codemirror/lib/codemirror.js',
-        themePath + 'global/plugins/codemirror/mode/javascript/javascript.js',
-        themePath + 'global/plugins/codemirror/mode/htmlmixed/htmlmixed.js',
-        themePath + 'global/plugins/codemirror/mode/css/css.js',
-    ], 'public/js/code.js');
+        themePath + 'global/plugins/select2/css/select2.min.css',
+        themePath + 'global/plugins/select2/css/select2-bootstrap.min.css'
+    ], 'public/css/forms.css');
+
+
 });

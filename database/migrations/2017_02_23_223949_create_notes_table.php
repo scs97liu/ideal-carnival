@@ -18,6 +18,7 @@ class CreateNotesTable extends Migration
             $table->text('text');
             $table->integer('notable_id')->unsigned();
             $table->string('notable_type');
+            $table->string('type')->default('client');
             $table->timestamps();
         });
     }

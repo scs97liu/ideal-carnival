@@ -10,6 +10,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('graph/bg', ['as' => 'graph.bg', 'uses' => 'GraphController@bg']);
     Route::get('graph/average', ['as' => 'graph.average', 'uses' => 'GraphController@average']);
     Route::resource('graph', GraphController::class);
+    Route::post('communication/prof/add', ['as' => 'communication.prof.add', 'uses' => 'CommunicationController@addProf']);
+    Route::get('communication/prof/search', ['as' => 'communication.prof.search', 'uses' => 'CommunicationController@search']);
+    Route::get('communication/manage', ['as' => 'communication.manage', 'uses' => 'CommunicationController@manage']);
     Route::resource('communication', CommunicationController::class);
     Route::resource('setting', SettingController::class);
     Route::get('tool', ['as' => 'tool.index', 'uses' => 'ToolController@index']);

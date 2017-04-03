@@ -2,83 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\MedicalProfessional;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommunicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('main.communication.index')->withTitle('Send Message to Medical Professional');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('main.communication.addprof')->withTitle('Add Medical Professional');
+        $connections = Auth::user()->connections()->attached()->get();
+        return view('main.communication.create')
+            ->withConnections($connections)
+            ->withTitle('Send Message to Medical Professional');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function manage()
     {
-        //
+        $connections = Auth::user()->connections()->attached()->get();
+        return view('main.communication.manage')
+            ->withConnections($connections)
+            ->withTitle('Manage Medical Professionals');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function search(Request $request)
     {
-        //
+        $term = $request->get('q');
+        return User::has('professional')
+            ->where('first_name', 'like', '%' . $term . '%')
+            ->orWhere('last_name', 'like', '%' . $term . '%')
+            ->with('professional')
+            ->get()->toJson();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function addProf(Request $request)
     {
-        //
+        $prof = MedicalProfessional::where('id', $request->get('id'))
+                ->get()->first();
+        Auth::user()->connections()->save($prof);
+        return redirect()->back()->withSuccess('Successfully added ' . $prof->user->present()->fullName . '!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

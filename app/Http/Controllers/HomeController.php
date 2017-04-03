@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         $fourteenDays = $this->fourteenAverage($user);
         $lowTarget = $user->getSetting('low_target', 0);
         $highTarget = $user->getSetting('high_target', 0);

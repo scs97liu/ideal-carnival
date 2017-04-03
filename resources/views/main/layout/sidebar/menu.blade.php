@@ -36,10 +36,23 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a href="{{ route('communication.index') }}" class="nav-link">
+    <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-stethoscope"></i>
         <span class="title">Communications</span>
+        <span class="arrow "></span>
     </a>
+    <ul class="sub-menu">
+        <li class="nav-item">
+            <a href="{{ route('communication.create') }}" class="nav-link ">
+                <span class="title">Send a Message</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('communication.manage') }}" class="nav-link ">
+                <span class="title">Manage Connections</span>
+            </a>
+        </li>
+    </ul>
 </li>
 <li class="nav-item">
     <a href="{{ route('tool.index') }}" class="nav-link">

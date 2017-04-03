@@ -41,4 +41,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Preferences::class);
     }
+
+    public function professional()
+    {
+        return $this->hasOne(MedicalProfessional::class);
+    }
+
+    public function connections()
+    {
+        return $this->belongsToMany(MedicalProfessional::class, 'permissions', 'user_id', 'medical_professional_id');
+    }
 }

@@ -17,8 +17,19 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Daniel',
             'last_name' => 'Kivi',
             'email' => 'sugarfreedanny@gmail.com',
-            'password' => bcrypt('password')]
+            'password' => bcrypt('password'),
+            'type' => 'client']
         );
+
+        $nurse = User::create([
+            'first_name' => 'Shane',
+            'last_name' => 'Liu',
+            'email' => 'scliu@lakeheadu.ca',
+            'password' => bcrypt('password'),
+            'type' => 'professional'
+        ]);
+
+
 
         $preferences = new \App\Preferences();
         $preferences->low_target = 4.0;
@@ -29,11 +40,17 @@ class UsersTableSeeder extends Seeder
         $preferences->notes = 'Overall pretty cool guy';
         $danny->preferences()->save($preferences);
 
-        $shane = User::create([
-            'first_name' => 'Shane',
-            'last_name' => 'Liu',
-            'email' => 'scliu@lakeheadu.ca',
-            'password' => bcrypt('password')]
-        );
+        $preferences = new \App\Preferences();
+        $preferences->low_target = 4.0;
+        $preferences->high_target = 8.0;
+        $preferences->insulin_to_carb = 10.0;
+        $preferences->insulin_sensitivity = 1.5;
+        $preferences->preferred_units = 'mmol/l';
+        $preferences->notes = 'A nurse';
+        $nurse->preferences()->save($preferences);
+
+        $prof = new \App\MedicalProfessional();
+        $prof->title = 'Nurse Practitioner';
+        $nurse->medicalProfessional()->save($prof);
     }
 }
