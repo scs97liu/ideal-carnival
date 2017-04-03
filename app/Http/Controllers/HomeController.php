@@ -41,6 +41,7 @@ class HomeController extends Controller
             ->week()
             ->attached()
             ->orderBy('time', 'asc')
+            ->has('bg')
             ->get();
 
         $byDate = $logs->groupBy(function($item, $key){
@@ -98,7 +99,7 @@ class HomeController extends Controller
         $fourteenDays = $user->logs()->range(
             Carbon::today()->addDays(-14),
             Carbon::tomorrow()
-        )->attached()->get();
+        )->attached()->has('bg')->get();
         $average = new Average();
         foreach($fourteenDays as $log)
         {
@@ -112,7 +113,7 @@ class HomeController extends Controller
     {
         $high = 0;
         $low = 0;
-        $week = $user->logs()->week()->attached()->get();
+        $week = $user->logs()->week()->attached()->has('bg')->get();
         $count = $week->count();
         foreach($week as $log)
         {

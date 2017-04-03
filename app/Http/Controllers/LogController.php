@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BloodSugar;
 use App\Carb;
 use App\Exercise;
+use App\Http\Requests\StoreLogEntry;
 use App\Log;
 use App\Medication;
 use App\Note;
@@ -29,7 +30,7 @@ class LogController extends Controller
         return view('main.log.create')->withTitle('Add New Log Entry');
     }
 
-    public function store(Request $request)
+    public function store(StoreLogEntry $request)
     {
         $mainLog = new Log();
         $mainLog->time =
@@ -92,6 +93,7 @@ class LogController extends Controller
         $logs = Log::range($start, $end)
             ->attached()
             ->orderBy('time', 'asc')
+            ->has('bg')
             ->get();
         $dataPoints = $logs->map(function($log){
             return $log->present()->chartDataPoint();
@@ -100,7 +102,7 @@ class LogController extends Controller
 
         return view('main.log.show')
             ->withLog($log)
-            ->withTitle('Log Entry - ' . $log->time->format('l j, F Y h:i:s A'))
+        ->withTitle('Log Entry - ' . $log->time->format('l j, F Y h:i:s A'))
             ->withData($dataPoints->toJson());
     }
 

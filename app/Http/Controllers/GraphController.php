@@ -35,6 +35,7 @@ class GraphController extends Controller
                 ->range($start, $end->copy()->addDay())
                 ->attached()
                 ->orderBy('time', 'asc')
+                ->has('bg')
                 ->get();
         } else {
             $start = Carbon::today();
@@ -43,6 +44,7 @@ class GraphController extends Controller
                 ->today()
                 ->attached()
                 ->orderBy('time', 'asc')
+                ->has('bg')
                 ->get();
         }
 
@@ -82,6 +84,7 @@ class GraphController extends Controller
                 ->range($start, $end->copy()->addDay())
                 ->attached()
                 ->orderBy('time', 'asc')
+                ->has('bg')
                 ->get();
         } else {
             $start = Carbon::today()->addMonths(-1);
@@ -90,6 +93,7 @@ class GraphController extends Controller
                 ->month()
                 ->attached()
                 ->orderBy('time', 'asc')
+                ->has('bg')
                 ->get();
         }
 
