@@ -26,6 +26,7 @@ class UsersTableSeeder extends Seeder
         $preferences->insulin_to_carb = 10.0;
         $preferences->insulin_sensitivity = 1.5;
         $preferences->preferred_units = 'mmol/l';
+        $preferences->notes = 'Overall pretty cool guy';
         $danny->preferences()->save($preferences);
 
         $shane = User::create([

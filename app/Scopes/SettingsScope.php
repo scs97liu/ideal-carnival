@@ -13,6 +13,7 @@ class SettingsScope implements Scope
         'insulin_to_carb' => 'double',
         'insulin_sensitivity' => 'double',
         'preferred_units' => 'string',
+        'notes' => 'string'
     ];
 
     /**

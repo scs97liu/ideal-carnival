@@ -21,6 +21,7 @@ class CreatePreferencesTable extends Migration
             $table->float('insulin_to_carb');
             $table->float('insulin_sensitivity');
             $table->string('preferred_units');
+            $table->text('notes');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

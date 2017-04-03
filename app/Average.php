@@ -58,7 +58,7 @@ class Average
      */
     public function getAverage()
     {
-        return $this->average;
+        return round($this->average, 1);
     }
 
     /**
@@ -90,7 +90,7 @@ class Average
      */
     public function getHigh()
     {
-        return $this->high;
+        return round($this->high, 1);
     }
 
     /**
@@ -106,7 +106,7 @@ class Average
      */
     public function getLow()
     {
-        return $this->low;
+        return round($this->low, 1);
     }
 
     /**
