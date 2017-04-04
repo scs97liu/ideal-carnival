@@ -1,3 +1,4 @@
+@if($user->type != 'professional')
 <li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link">
         <i class="icon-home"></i>
@@ -35,6 +36,7 @@
         </li>
     </ul>
 </li>
+@endif
 <li class="nav-item">
     <a href="javascript:;" class="nav-link nav-toggle">
         <i class="fa fa-stethoscope"></i>
@@ -62,6 +64,7 @@
         </li>
     </ul>
 </li>
+@if($user->type != 'professional')
 <li class="nav-item">
     <a href="{{ route('tool.index') }}" class="nav-link">
         <i class="fa fa-upload"></i>
@@ -74,3 +77,4 @@
         <span class="title">Settings</span>
     </a>
 </li>
+@endif
