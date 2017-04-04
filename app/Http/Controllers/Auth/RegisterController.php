@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,9 +49,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first-name' => 'required|max:255',
+            'last-name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'type' => 'required',
+            'tnc' => 'required'
         ]);
     }
 
@@ -62,10 +66,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = new User();
+        $user->first_name = $data['first-name'];
+        $user->last_name = $data['last-name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->type = $data['type'];
+        $user->save();
+        return $user;
     }
+
+    protected function registered(Request $request, $user)
+    {
+        $request->session()->set('registered', true);
+        return redirect($this->redirectTo);
+    }
+
+
 }

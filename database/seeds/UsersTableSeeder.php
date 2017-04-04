@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         $danny = User::create([
             'first_name' => 'Daniel',
             'last_name' => 'Kivi',
-            'email' => 'sugarfreedanny@gmail.com',
+            'email' => 'client@client.com',
             'password' => bcrypt('password'),
             'type' => 'client']
         );
@@ -24,12 +24,10 @@ class UsersTableSeeder extends Seeder
         $nurse = User::create([
             'first_name' => 'Shane',
             'last_name' => 'Liu',
-            'email' => 'scliu@lakeheadu.ca',
+            'email' => 'nurse@nurse.com',
             'password' => bcrypt('password'),
             'type' => 'professional'
         ]);
-
-
 
         $preferences = new \App\Preferences();
         $preferences->low_target = 4.0;

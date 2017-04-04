@@ -10,7 +10,7 @@
                 @include('main.layout.header.inbox')
 {{--                @include('main.layout.header.tasks')--}}
                 @include('main.layout.header.user')
-                @include('main.layout.header.sidebartoggle')
+{{--                @include('main.layout.header.sidebartoggle')--}}
             </ul>
         </div>
     </div>
