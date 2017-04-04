@@ -51,6 +51,6 @@ class UsersTableSeeder extends Seeder
 
         $prof = new \App\MedicalProfessional();
         $prof->title = 'Nurse Practitioner';
-        $nurse->medicalProfessional()->save($prof);
+        $nurse->professional()->save($prof);
     }
 }

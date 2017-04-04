@@ -46,10 +46,25 @@ class CommunicationController extends Controller
 
     public function addProf(Request $request)
     {
-        $prof = MedicalProfessional::where('id', $request->get('id'))
+        $existing = MedicalProfessional::whereHas('connections', function($query) use ($request){
+           $query->where('users.id', Auth::user()->id);
+        })->get();
+        if(count($existing) <= 0)
+        {
+            $prof = MedicalProfessional::where('id', $request->get('id'))
                 ->get()->first();
-        Auth::user()->connections()->save($prof);
-        return redirect()->back()->withSuccess('Successfully added ' . $prof->user->present()->fullName . '!');
+            Auth::user()->connections()->attach($prof);
+            return redirect()->back()->withSuccess('Successfully added ' . $prof->user->present()->fullName . '!');
+        } else {
+            return redirect()->back()->withError('You can not add a medical professional twice');
+        }
+    }
+
+    public function deleteProf(Request $request)
+    {
+        $prof = MedicalProfessional::where('id', $request->get('id'))->get()->first();
+        Auth::user()->connections()->detach($prof);
+        return redirect()->back()->withSuccess('Successfully removed ' . $prof->user->present()->fullName . '!');
     }
 
 }

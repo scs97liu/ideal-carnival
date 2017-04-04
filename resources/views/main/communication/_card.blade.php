@@ -10,7 +10,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="btn default btn-outline" href="javascript:;">
+                        <a class="btn default btn-outline delete-prof" href="javascript:;" data-id="{{ $professional->id }}">
                             <i class="icon-trash"></i>
                         </a>
                     </li>
