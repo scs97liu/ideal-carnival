@@ -18,6 +18,11 @@ class Log extends Model
         'time'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function bg()
     {
         return $this->hasOne(BloodSugar::class);
@@ -45,7 +50,7 @@ class Log extends Model
 
     public function scopeAttached($query)
     {
-        return $query->with('bg.notes', 'carb.notes', 'exercise.notes', 'medications.notes', 'notes');
+        return $query->with('user', 'bg.notes', 'carb.notes', 'exercise.notes', 'medications.notes', 'notes');
     }
 
     public function scopeRange($query, $begin, $end)

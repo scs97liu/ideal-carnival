@@ -116,7 +116,7 @@ class LogController extends Controller
 
         $start = $log->time->copy()->addHours(-24);
         $end = $log->time->copy()->addHours(24);
-        $logs = Log::range($start, $end)
+        $logs = $log->user->logs()->range($start, $end)
             ->attached()
             ->orderBy('time', 'asc')
             ->has('bg')
