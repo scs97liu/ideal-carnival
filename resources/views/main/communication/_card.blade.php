@@ -5,7 +5,7 @@
             <div class="mt-overlay">
                 <ul class="mt-info">
                     <li>
-                        <a class="btn default btn-outline" href="javascript:;">
+                        <a class="btn default btn-outline" href="{{ route('communication.create', ['id' => $professional->id ]) }}">
                             <i class="fa fa-paper-plane-o"></i>
                         </a>
                     </li>

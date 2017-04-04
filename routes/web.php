@@ -13,6 +13,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('communication/prof/delete', ['as' => 'communication.prof.delete', 'uses' => 'CommunicationController@deleteProf']);
     Route::post('communication/prof/add', ['as' => 'communication.prof.add', 'uses' => 'CommunicationController@addProf']);
     Route::get('communication/prof/search', ['as' => 'communication.prof.search', 'uses' => 'CommunicationController@search']);
+    Route::post('communication/log/search', ['as' => 'communication.log.search', 'uses' => 'CommunicationController@searchLogs']);
     Route::get('communication/manage', ['as' => 'communication.manage', 'uses' => 'CommunicationController@manage']);
     Route::resource('communication', CommunicationController::class);
     Route::resource('setting', SettingController::class);

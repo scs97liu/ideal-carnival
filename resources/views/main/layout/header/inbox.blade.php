@@ -1,71 +1,33 @@
 <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-        <i class="icon-envelope-open"></i>
-        <span class="badge badge-default"> 4 </span>
+        @if(count($mail) > 0)
+            <i class="icon-envelope"></i>
+            <span class="badge badge-default"> {{ count($mail) }} </span>
+        @else
+            <i class="icon-envelope-open"></i>
+        @endif
     </a>
     <ul class="dropdown-menu">
         <li class="external">
             <h3>You have
-                <span class="bold">7 New</span> Messages</h3>
-            <a href="app_inbox.html">view all</a>
+                <span class="bold">{{ count($mail) }} New</span> Messages</h3>
+            <a href="{{ route('communication.index') }}">view all</a>
         </li>
         <li>
             <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                <li>
-                    <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{ asset('layout/img/avatar2.jpg') }}" class="img-circle" alt=""> </span>
-                        <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">Just Now </span>
-                                                    </span>
-                        <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{ asset('/layout/img/avatar3.jpg') }}" class="img-circle" alt=""> </span>
-                        <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">16 mins </span>
-                                                    </span>
-                        <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{ asset('/layout/img/avatar1.jpg') }}" class="img-circle" alt=""> </span>
-                        <span class="subject">
-                                                        <span class="from"> Bob Nilson </span>
-                                                        <span class="time">2 hrs </span>
-                                                    </span>
-                        <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{ asset('/layout/img/avatar2.jpg') }}" class="img-circle" alt=""> </span>
-                        <span class="subject">
-                                                        <span class="from"> Lisa Wong </span>
-                                                        <span class="time">40 mins </span>
-                                                    </span>
-                        <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                                                    <span class="photo">
-                                                        <img src="{{ asset('/layout/img/avatar3.jpg') }}" class="img-circle" alt=""> </span>
-                        <span class="subject">
-                                                        <span class="from"> Richard Doe </span>
-                                                        <span class="time">46 mins </span>
-                                                    </span>
-                        <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                </li>
+                @foreach($mail as $message)
+                    <li>
+                        <a href="{{ route('communication.show', $message->id) }}">
+                            <span class="photo">
+                                <img src="{{ $message->sender->present()->gravatar }}" class="img-circle" alt="">
+                            </span>
+                            <span class="subject">
+                                <span class="from"> {{ $message->sender->present()->fullName }} </span>
+                            </span>
+                            <span class="message">{{ $message->text }}</span>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </li>
     </ul>

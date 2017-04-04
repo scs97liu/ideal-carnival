@@ -1,3 +1,4 @@
+@if($row != null)
 <li>
     <a href="{{ $row[5] }}">
         <div class="col1">
@@ -17,3 +18,4 @@
         </div>
     </a>
 </li>
+@endif

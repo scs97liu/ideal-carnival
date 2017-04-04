@@ -6,9 +6,9 @@
         </a>
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-                @include('main.layout.header.notifications')
+{{--                @include('main.layout.header.notifications')--}}
                 @include('main.layout.header.inbox')
-                @include('main.layout.header.tasks')
+{{--                @include('main.layout.header.tasks')--}}
                 @include('main.layout.header.user')
                 @include('main.layout.header.sidebartoggle')
             </ul>

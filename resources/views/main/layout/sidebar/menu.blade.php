@@ -48,6 +48,14 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('communication.index') }}" class="nav-link ">
+                <span class="title">View All Message</span>
+                @if(count($mail) > 0)
+                    <span class="badge badge-success">{{ count($mail) }}</span>
+                @endif
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('communication.manage') }}" class="nav-link ">
                 <span class="title">Manage Connections</span>
             </a>

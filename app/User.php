@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(MedicalProfessional::class, 'permissions', 'user_id', 'medical_professional_id');
     }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'from_user');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'to_user');
+    }
 }
