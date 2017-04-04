@@ -54,7 +54,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="number" min="0" step="1" name="insulin[]" class="form-control" placeholder="">
+                                    <input type="number" min="0" name="insulin[]" class="form-control" placeholder="">
                                     <span class="input-group-addon" id="sizing-addon1">U</span>
                                 </div>
                             </div>
