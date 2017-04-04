@@ -60,7 +60,7 @@ class LogController extends Controller
     {
         $mainLog = new Log();
         $mainLog->time =
-            Carbon::createFromFormat('d F Y - H:i', $request->input('datetime'));
+            Carbon::createFromFormat('d F Y - H:i', $request->input('datetime'), 'UTC');
         $mainLog->user_id = Auth::user()->id;
         $mainLog->save();
 

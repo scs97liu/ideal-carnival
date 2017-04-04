@@ -56,7 +56,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="number" min="0" step="1" name="insulin[]" class="form-control" value="{{ $medication->amount or null }}">
+                                    <input type="number" min="0" step="0.01" name="insulin[]" class="form-control" value="{{ $medication->amount or null }}">
                                     <span class="input-group-addon" id="sizing-addon1">U</span>
                                 </div>
                             </div>

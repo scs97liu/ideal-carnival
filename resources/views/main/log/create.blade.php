@@ -13,7 +13,7 @@
                     <h4 class="block">Date/Time</h4>
                     <div class="form-group">
                         <div class="input-group input-group-lg input-xlarge date form_datetime">
-                            <input type="text" size="16" name="datetime" readonly class="form-control" value="{{ date('d F Y - H:i') }}">
+                            <input type="text" size="16" name="datetime" readonly class="form-control" value="{{ \Carbon\Carbon::now('UTC')->addHours(-4)->format('d F Y - H:i') }}">
                             <span class="input-group-btn">
                                 <button class="btn default date-set" type="button">
                                     <i class="fa fa-calendar"></i>
@@ -54,7 +54,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="input-group input-group-lg">
-                                    <input type="number" min="0" name="insulin[]" class="form-control" placeholder="">
+                                    <input type="number" min="0" step="0.01" name="insulin[]" class="form-control" placeholder="" novalidate>
                                     <span class="input-group-addon" id="sizing-addon1">U</span>
                                 </div>
                             </div>
