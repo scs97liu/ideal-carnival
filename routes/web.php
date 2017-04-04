@@ -3,9 +3,11 @@
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index'])->middleware('auth');
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index'])->middleware(['auth', 'impersonating']);
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => ['auth', 'impersonating']], function(){
+    Route::get('impersonate/stop', ['as' => 'impersonate.stop', 'uses' => 'HomeController@stopImpersonate']);
+    Route::get('impersonate/{id}', ['as' => 'impersonate', 'uses' => 'HomeController@impersonate']);
     Route::resource('log', LogController::class);
     Route::get('graph/bg', ['as' => 'graph.bg', 'uses' => 'GraphController@bg']);
     Route::get('graph/average', ['as' => 'graph.average', 'uses' => 'GraphController@average']);

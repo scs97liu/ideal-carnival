@@ -9,25 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user = Auth::user();
-
         $fourteenDays = $this->fourteenAverage($user);
         $lowTarget = $user->getSetting('low_target', 0);
         $highTarget = $user->getSetting('high_target', 0);
@@ -160,5 +146,17 @@ class HomeController extends Controller
             $rows = array_merge($rows, $log->present()->forDashboard());
         }
         return $rows;
+    }
+
+    public function impersonate($id)
+    {
+        session(['impersonating' => $id]);
+        return redirect(route('home'));
+    }
+
+    public function stopImpersonate()
+    {
+        session(['impersonating' => null]);
+        return redirect(route('home'));
     }
 }

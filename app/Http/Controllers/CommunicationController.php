@@ -71,10 +71,19 @@ class CommunicationController extends Controller
 
     public function manage()
     {
-        $connections = Auth::user()->connections()->attached()->get();
-        return view('main.communication.manage')
-            ->withConnections($connections)
-            ->withTitle('Manage Medical Professionals');
+        if(Auth::user()->type == 'professional')
+        {
+            $connections = Auth::user()->professional->connections()->get();
+            return view('main.communication.manage_clients')
+                ->withConnections($connections)
+                ->withTitle('Manage Clients');
+        } else {
+            $connections = Auth::user()->connections()->attached()->get();
+            return view('main.communication.manage')
+                ->withConnections($connections)
+                ->withTitle('Manage Medical Professionals');
+        }
+
     }
 
     public function search(Request $request)

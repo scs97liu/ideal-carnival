@@ -10,6 +10,14 @@
     </div>
 @endif
 
+@if(session('impersonating'))
+    <div class="alert alert-warning">
+        <strong>IMPOSTER!</strong>
+        You are currently pretending to be this user
+        click <strong><a href="{{ route('impersonate.stop') }}">HERE</a></strong> to stop.
+    </div>
+@endif
+
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
